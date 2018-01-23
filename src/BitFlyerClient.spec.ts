@@ -28,14 +28,14 @@ describe('Bitflyer', () => {
         product_code: "BTC_JPY",
         child_order_type: "LIMIT",
         side: "BUY",
-        price: 30000,
-        size: 0.1,
+        price: 31690,
+        size: 0.01,
         minute_to_expire: 10000,
         time_in_force: "GTC"
       }
 
       const res = {
-        "child_order_acceptance_id": "JRF20150707-050237-639234"
+        "child_order_acceptance_id": "JRF20150707-200203-452209"
       }
       
       const scope = nock(baseUrl)
