@@ -6,7 +6,7 @@ import { hmac, queryStringify } from './Util';
  */
 export default class HttpClient {
   
-  constructor(readonly baseUrl: string, readonly key: string, readonly secret: string) {}
+  constructor(readonly baseUrl: string, readonly key?: string, readonly secret: string = '') {}
   
   /**
    * HTTP GETリクエストを送信します。
@@ -55,14 +55,14 @@ export default class HttpClient {
       'ACCESS-SIGN': sign
     };
     const options = {
-      url: path,
+      url: url,
       method: method,
       headers: headers,
       body: body
     };
     console.log(`Request to ${url}. Request: ${JSON.stringify(options)}`);
-    const res = await rp(options);
-    console.log(`Response from ${res.url}. Status Code: ${res.statusCode}`);
+    const res = JSON.parse(await rp(options)) as R;
+    console.log(`Response from ${url}.`);
    
     return res;
   }

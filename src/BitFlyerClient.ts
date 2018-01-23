@@ -3,11 +3,11 @@ import HttpClient from './HttpClient';
 /**
  * BitFlyer用のAPIクラスです。
  */
-export default class BitFlyerClient extends HttpClient {
+export class BitFlyerClient extends HttpClient {
     
   private static readonly BASE_URL = 'https://api.bitflyer.jp';
 
-  constructor(readonly key: string, readonly secret: string) {
+  constructor(readonly key?: string, readonly secret:  string = '') {
       super(BitFlyerClient.BASE_URL, key, secret);
   }
   
