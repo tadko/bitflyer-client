@@ -27,7 +27,7 @@
   "scripts": {
     "build": "webpack",
     "test": "mocha -r ts-node/register src/**/*.spec.ts",
-    "postinstall": "npm run build"
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
