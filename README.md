@@ -5,7 +5,7 @@ JS client for Bitflyer API
 
 ## Install
 
-`npm install --save bitflyer-client`
+`npm install --save @tadko/bitflyer-client`
 
 ## Usage
 ```typescript
