@@ -9,7 +9,7 @@ JS client for Bitflyer API
 
 ## Usage
 ```typescript
-import { BitflyerClient } from 'bitflyer-client'
+import { BitflyerClient } from '@tadko/bitflyer-client'
 
 const bitflyerClient = new BitflyerClient();
 
