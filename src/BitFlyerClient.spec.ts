@@ -49,4 +49,29 @@ describe('Bitflyer', () => {
     });
 
   })
+
+  describe('#get_balance', () => {
+    beforeEach(() => {
+      bf = new BitFlyerClient('key', 'secret');
+    });
+    it('can request', () => {
+      const res = [
+        {"currency_code": "JPY", "amount": 1024078, "available": 508000},
+        {"currency_code": "BTC", "amount": 10.24, "available": 4.12},
+        {"currency_code": "ETH", "amount": 20.48, "available": 16.38}
+      ]
+      
+      const scope = nock(baseUrl)
+      .get('/v1/me/getbalance')
+      .reply(200, res);
+
+      return bf.getBalance().then(data => {
+        console.log(data)
+        expect(data).to.deep.equal(res);
+        expect(scope.isDone()).is.true;
+      })
+    });
+
+  })
+
 })
