@@ -79,6 +79,24 @@ export class BitFlyerClient extends HttpClient {
     return await this.get<BoardResponse>(path);
   }
   
+  /**
+   * Ticker
+   * @return {Promise<TickerResponse>} レスポンス
+   */
+  async getTicker(): Promise<TickerResponse> {
+    const path = '/v1/ticker';
+    return await this.get<TickerResponse>(path);
+  }
+ 
+  /**
+   * 板の状態
+   * @return {Promise<BoardStateResponse>} レスポンス
+   */
+  async getBoardState(): Promise<BoardStateResponse> {
+    const path = '/v1/getboardstate';
+    return await this.get<BoardStateResponse>(path);
+  }
+
 }
 
 export interface PageFormat {
@@ -190,3 +208,23 @@ export interface BoardResponse {
   asks: {price: number, size: number}[];
 }
 
+export interface TickerResponse {
+  product_code: string;
+  timestamp: string;
+  tick_id: number;
+  best_bid: number;
+  best_ask: number;
+  best_bid_size: number;
+  best_ask_size: number;
+  total_bid_depth: number;
+  total_ask_depth: number;
+  ltp: number;
+  volume: number;
+  volume_by_product: number;
+}
+
+export interface BoardStateResponse {
+  health: 'NORMAL'|'BUSY'|'VERY_BUSY'|'SUPER_BUSY'|'NO_ORDER'|'STOP';
+  state: 'RUNNING'|'CLOSED'|'STARTING'|'PREOPEN'|'CIRCUIT BREAK'|'AWAITING SQ'|'MATURED';
+  data?: {special_quotation: number};
+}
