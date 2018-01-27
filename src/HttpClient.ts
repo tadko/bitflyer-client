@@ -60,9 +60,7 @@ export default class HttpClient {
       headers: headers,
       body: body
     };
-    console.log(`Request to ${url}. Request: ${JSON.stringify(options)}`);
     const res = JSON.parse(await rp(options)) as R;
-    console.log(`Response from ${url}.`);
    
     return res;
   }

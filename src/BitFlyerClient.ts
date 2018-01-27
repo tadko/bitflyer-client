@@ -83,9 +83,9 @@ export class BitFlyerClient extends HttpClient {
    * Ticker
    * @return {Promise<TickerResponse>} レスポンス
    */
-  async getTicker(): Promise<TickerResponse> {
+  async getTicker(request?: TickerRequest): Promise<TickerResponse> {
     const path = '/v1/ticker';
-    return await this.get<TickerResponse>(path);
+    return await this.get<TickerResponse, TickerRequest>(path, request);
   }
  
   /**
@@ -106,17 +106,17 @@ export interface PageFormat {
 }
 
 export interface SendChildOrderRequest {
-    product_code: string;
-    child_order_type: 'LIMIT'|'MARKET';
-    side: 'BUY'|'SELL';
-    price?: number;
-    size: number;
-    minute_to_expire?: number;
-    time_in_force?: 'GTC'|'IOC'|'FOK';
+  product_code: string;
+  child_order_type: 'LIMIT'|'MARKET';
+  side: 'BUY'|'SELL';
+  price?: number;
+  size: number;
+  minute_to_expire?: number;
+  time_in_force?: 'GTC'|'IOC'|'FOK';
 }
 
 export interface SendChildOrderResponse {
-    child_order_acceptance_id: string;
+  child_order_acceptance_id: string;
 }
 
 export interface CancelChildOrderRequest {
@@ -176,7 +176,7 @@ export interface Execution {
 }
 
 export interface PositionsRequest {
-  product_code: 'FX_BTC_JPY';
+  product_code: string;
 }
 
 export type PositionsResponse = Position[];
@@ -206,6 +206,10 @@ export interface BoardResponse {
   mid_price: number;
   bids: {price: number, size: number}[];
   asks: {price: number, size: number}[];
+}
+
+export interface TickerRequest {
+  product_code?: string;
 }
 
 export interface TickerResponse {
