@@ -13,8 +13,8 @@ import { BitflyerClient } from '@tadko/bitflyer-client'
 
 const bitflyerClient = new BitflyerClient();
 
-bitflyerClient.getBalance()
-.then(console.log)
-.catch(console.error)
+bitflyerClient.getBoard()
+  .then(console.log)
+  .catch(console.error)
 ```
 
