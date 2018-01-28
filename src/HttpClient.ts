@@ -19,7 +19,9 @@ export default class HttpClient {
     let pathWithParam = path;
     if (requestParam) {
       const param = queryStringify(requestParam);
-      pathWithParam += `?${param}`;
+      if (param) {
+        pathWithParam += `?${param}`;
+      }
     }
     return await this.call<R>(pathWithParam, method);
   }

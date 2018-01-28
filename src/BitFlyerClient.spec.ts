@@ -19,7 +19,7 @@ describe('Bitflyer', () => {
     });
   });
 
-  describe('#send_child_order', () => {
+  describe('#sendchildorder', () => {
     beforeEach(() => {
       bf = new BitFlyerClient('key', 'secret');
     });
@@ -49,7 +49,7 @@ describe('Bitflyer', () => {
     });
   })
 
-  describe('#get_balance', () => {
+  describe('#getbalance', () => {
     beforeEach(() => {
       bf = new BitFlyerClient('key', 'secret');
     });
@@ -71,7 +71,7 @@ describe('Bitflyer', () => {
     });
   })
 
-  describe('#get_ticker', () => {
+  describe('#getticker', () => {
     beforeEach(() => {
       bf = new BitFlyerClient('key', 'secret');
     });
@@ -97,6 +97,28 @@ describe('Bitflyer', () => {
       .reply(200, res);
 
       return bf.getTicker().then(data => {
+        expect(data).to.deep.equal(res);
+        expect(scope.isDone()).is.true;
+      })
+    });
+  })
+
+  describe('#getboardstate', () => {
+    beforeEach(() => {
+      bf = new BitFlyerClient('key', 'secret');
+    });
+    it('can request', () => {
+
+      const res = {
+        "health": "NORMAL",
+        "state": "RUNNING",
+      }
+
+      const scope = nock(baseUrl)
+      .get('/v1/getboardstate')
+      .reply(200, res);
+
+      return bf.getBoardState().then(data => {
         expect(data).to.deep.equal(res);
         expect(scope.isDone()).is.true;
       })

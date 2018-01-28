@@ -72,15 +72,17 @@ export class BitFlyerClient extends HttpClient {
   
   /**
    * 板情報
+   * @param  {BoardRequest} request リクエスト
    * @return {Promise<BoardResponse>} レスポンス
    */
-  async getBoard(): Promise<BoardResponse> {
+  async getBoard(request?: BoardRequest): Promise<BoardResponse> {
     const path = '/v1/board';
-    return await this.get<BoardResponse>(path);
+    return await this.get<BoardResponse, BoardRequest>(path, request);
   }
   
   /**
    * Ticker
+   * @param  {TickerRequest} request リクエスト
    * @return {Promise<TickerResponse>} レスポンス
    */
   async getTicker(request?: TickerRequest): Promise<TickerResponse> {
@@ -90,11 +92,12 @@ export class BitFlyerClient extends HttpClient {
  
   /**
    * 板の状態
+   * @param  {BoardStateRequest} request リクエスト
    * @return {Promise<BoardStateResponse>} レスポンス
    */
-  async getBoardState(): Promise<BoardStateResponse> {
+  async getBoardState(request?: BoardStateRequest): Promise<BoardStateResponse> {
     const path = '/v1/getboardstate';
-    return await this.get<BoardStateResponse>(path);
+    return await this.get<BoardStateResponse, BoardStateRequest>(path, request);
   }
 
 }
@@ -202,6 +205,10 @@ export interface Balance {
   available: number;
 }
 
+export interface BoardRequest {
+  product_code?: string;
+}
+
 export interface BoardResponse {
   mid_price: number;
   bids: {price: number, size: number}[];
@@ -225,6 +232,10 @@ export interface TickerResponse {
   ltp: number;
   volume: number;
   volume_by_product: number;
+}
+
+export interface BoardStateRequest {
+  product_code?: string;
 }
 
 export interface BoardStateResponse {
